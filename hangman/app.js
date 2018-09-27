@@ -1,14 +1,18 @@
-// Primitive value: string, number, boolean, null, undefined (everything not in this list is an object)
+const puzzleEl = document.querySelector('#puzzle')
+const guessesEl = document.querySelector('#guesses')
+const game1 = new Hangman('Cat', 2)
 
-// Prototype chain for:
-// Object: looks to myObject first, then Object.prototype, then look to null (which never has a property)
-// Array: looks to myArray first, then Array.prototype, then Object.prototype, then look to null (which never has a property)
-// Function myFunction, then Function.prototype, then Object.prototype, then look to null (which never has a property)
-// String: myString, then String.prototype, then Object.prototype, then look to null (which never has a property)
-// Number: myNumber, then Number.prototype, then Object.prototype, then look to null (which never has a property)
-// Boolean: myBoolean, then Boolean.prototype, then Object.prototype, then look to null (which never has a property)
-const product = 'Computer'
-console.log(product.split)
+puzzleEl.textContent = game1.getPuzzle()
+guessesEl.textContent = game1.remainingGuesses
+console.log(game1.status)
 
-const otherProduct = new String('Phone')
-console.log(otherProduct)
+console.log(game1.getPuzzle())
+console.log(game1.remainingGuesses)
+
+window.addEventListener('keypress', function (e) {
+    const guess = String.fromCharCode(e.charCode)
+    game1.makeGuess(guess)
+    puzzleEl.textContent = game1.getPuzzle()
+    guessesEl.textContent = game1.remainingGuesses
+    console.log(game1.status)
+})
